@@ -1,5 +1,6 @@
+--Example 1:
 CREATE INDEX inde ON
-    emp1 (
+    emp (
         ename
     );
 
@@ -9,10 +10,12 @@ SELECT
     MIN(sal),
     AVG(sal)
 FROM
-    emp1
+    emp
 GROUP BY
     deptno;
 
+
+--Example 2:
 CREATE VIEW aggregate AS
     SELECT
         deptno,
@@ -20,7 +23,7 @@ CREATE VIEW aggregate AS
         MIN(sal) "MINSAL",
         AVG(sal) "AVGSAL"
     FROM
-        emp1
+        emp
     GROUP BY
         deptno;
 
@@ -29,6 +32,7 @@ SELECT
 FROM
     aggregate;
 
+--Example 3:
 CREATE OR REPLACE VIEW emp_view AS
     SELECT
         empno,
@@ -37,7 +41,7 @@ CREATE OR REPLACE VIEW emp_view AS
         deptno,
         hiredate
     FROM
-        emp1;
+        emp;
 
 SELECT
     *
@@ -54,8 +58,9 @@ INSERT INTO emp_view VALUES (
 SELECT
     *
 FROM
-    emp1;
-
+    emp;
+    
+--Example 4:
 CREATE VIEW emp_dep AS
     SELECT
         e.empno,
@@ -63,7 +68,7 @@ CREATE VIEW emp_dep AS
         e.deptno,
         d.dept_loc
     FROM
-        emp1       e,
+        emp       e,
         department d;
 
 INSERT INTO emp_dep VALUES (
@@ -75,24 +80,26 @@ INSERT INTO emp_dep VALUES (
 
 desc department;
 
+--Example 5:
 CREATE VIEW my_emp AS
     SELECT
         *
     FROM
-        emp1
+        emp
     WHERE
         deptno = 10;
 
 SELECT
     *
 FROM
-    emp1;
+    emp;
 
 SELECT
     *
 FROM
     my_emp;
 
+--Example 6:
 CREATE SEQUENCE dept_s INCREMENT BY 1 START WITH 12 MINVALUE 10 MAXVALUE 20 NOCYCLE NOCACHE;
 
 TRUNCATE TABLE department;
@@ -118,6 +125,7 @@ FROM
 
 ALTER SEQUENCE dept_s CYCLE;
 
+--Example 7:
 CREATE SEQUENCE roll INCREMENT BY 01 START WITH 0401 MINVALUE 01 MAXVALUE 20 NOCYCLE;
 
 CREATE TABLE student_data (
